@@ -14,8 +14,18 @@ public class CodeAction extends AbstractAction
 	public void actionPerformed(ActionEvent e)
 	{
 		String text = Crypter2.getInstance().getInputText();
-		Crypter2.getInstance().setOutputText(text);
+		int code = Crypter2.getInstance().getCode();
 		
-		System.out.println("CodeAction");
+		String coded = "";
+		for (int i = 0; i < text.length(); ++i)
+		{
+			int token = (int)text.charAt(i) + code;
+			if (token > 127)
+			{
+				token -= 95;
+			}
+			coded += (char)token;
+		}
+		Crypter2.getInstance().setOutputText(coded);
 	}
 }

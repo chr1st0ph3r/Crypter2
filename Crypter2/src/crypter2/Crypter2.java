@@ -9,10 +9,10 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
 import javax.swing.UIManager;
 
 import actions.CodeAction;
@@ -37,8 +37,11 @@ public class Crypter2 extends JFrame
 	/*
 	 * swing components
 	 */
-	private JTextPane inputArea = new JTextPane();
-	private JTextPane outputArea = new JTextPane();
+	private JEditorPane inputArea = new JEditorPane();
+	private JEditorPane outputArea = new JEditorPane();
+	
+	private JComboBox<String> codeLetter = new JComboBox<String>(letterList);
+	private JComboBox<String> codeNumber = new JComboBox<String>(numberList);
 	
 	/*
 	 * constructor
@@ -50,7 +53,7 @@ public class Crypter2 extends JFrame
 	}
 	
 	/*
-	 * functoins
+	 * functions
 	 */
 	private void initGui()
 	{
@@ -64,6 +67,7 @@ public class Crypter2 extends JFrame
 		this.setLocationRelativeTo(null);
 		this.setLayout(new BorderLayout());
 		
+		// look and feel
 		try
 		{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -80,9 +84,7 @@ public class Crypter2 extends JFrame
 		JButton decodeButton = new JButton("Decodieren");
 		decodeButton.addActionListener(new DecodeAction());
 		
-		JLabel label = new JLabel("Codierung:");
-		JComboBox<String> codeLetter = new JComboBox<String>(letterList);
-		JComboBox<String> codeNumber = new JComboBox<String>(numberList);
+		JLabel label = new JLabel("Code:");
 		
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new FlowLayout());
@@ -107,6 +109,12 @@ public class Crypter2 extends JFrame
 		
 		this.add(controlPanel, BorderLayout.NORTH);
 		this.add(textPanel, BorderLayout.CENTER);
+	}
+	
+	public int getCode()
+	{
+		int offset = ((String)codeLetter.getSelectedItem()).charAt(0) - ((String)codeNumber.getSelectedItem()).charAt(0);
+		return offset;
 	}
 	
 	public String getInputText()
