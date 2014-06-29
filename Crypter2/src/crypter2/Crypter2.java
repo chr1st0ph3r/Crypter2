@@ -26,13 +26,12 @@ public class Crypter2 extends JFrame
 	private static final long serialVersionUID = 1L;
 	private static Crypter2 instance = null;
 	
-	private Color background = new Color(103, 173, 203);
-	
 	private String[] letterList = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
 			"J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
 			"W", "X", "Y", "Z"};
 	private String[] numberList = {"0", "1", "2", "3", "4", "5", "6", "7", "8",
 			"9"};
+	private Color[] colorList = {new Color(103, 173, 203), Color.PINK};
 	
 	/*
 	 * swing components
@@ -40,8 +39,8 @@ public class Crypter2 extends JFrame
 	private JEditorPane inputArea = new JEditorPane();
 	private JEditorPane outputArea = new JEditorPane();
 	
-	private JComboBox<String> codeLetter = new JComboBox<String>(letterList);
-	private JComboBox<String> codeNumber = new JComboBox<String>(numberList);
+	private JComboBox<String> codeLetterBox = new JComboBox<String>(letterList);
+	private JComboBox<String> codeNumberBox = new JComboBox<String>(numberList);
 	
 	/*
 	 * constructor
@@ -88,22 +87,22 @@ public class Crypter2 extends JFrame
 		
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new FlowLayout());
-		controlPanel.setBackground(this.background);
+		controlPanel.setBackground(this.colorList[0]);
 		controlPanel.add(codeButton);
 		controlPanel.add(decodeButton);
 		controlPanel.add(label);
-		controlPanel.add(codeLetter);
-		controlPanel.add(codeNumber);
+		controlPanel.add(codeLetterBox);
+		controlPanel.add(codeNumberBox);
 		
-		inputArea.setBorder(BorderFactory.createLineBorder(this.background, 2));
+		inputArea.setBorder(BorderFactory.createLineBorder(this.colorList[0], 2));
 		inputArea.setEditable(true);
 		
-		outputArea.setBorder(BorderFactory.createLineBorder(this.background, 2));
+		outputArea.setBorder(BorderFactory.createLineBorder(this.colorList[0], 2));
 		outputArea.setEditable(false);
 		
 		JPanel textPanel = new JPanel();
 		textPanel.setLayout(new GridLayout(1, 2));
-		textPanel.setBackground(this.background);
+		textPanel.setBackground(this.colorList[0]);
 		textPanel.add(inputArea);
 		textPanel.add(outputArea);
 		
@@ -113,7 +112,7 @@ public class Crypter2 extends JFrame
 	
 	public int getCode()
 	{
-		int offset = ((String)codeLetter.getSelectedItem()).charAt(0) - ((String)codeNumber.getSelectedItem()).charAt(0);
+		int offset = ((String)codeLetterBox.getSelectedItem()).charAt(0) - ((String)codeNumberBox.getSelectedItem()).charAt(0);
 		return offset;
 	}
 	
