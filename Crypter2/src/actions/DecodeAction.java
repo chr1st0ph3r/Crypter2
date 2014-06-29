@@ -11,7 +11,7 @@ public class DecodeAction extends AbstractAction
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		System.out.println("Decode!");
+		System.out.println("DecodeAction");
 	}
 
 }

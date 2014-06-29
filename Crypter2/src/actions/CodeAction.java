@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import crypter2.Crypter2;
+
 public class CodeAction extends AbstractAction
 {
 	private static final long serialVersionUID = 1L;
@@ -11,7 +13,9 @@ public class CodeAction extends AbstractAction
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		System.out.println("Code!");
+		String text = Crypter2.getInstance().getInputText();
+		Crypter2.getInstance().setOutputText(text);
+		
+		System.out.println("CodeAction");
 	}
-
 }

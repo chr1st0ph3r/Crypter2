@@ -35,6 +35,12 @@ public class Crypter2 extends JFrame
 			"9"};
 	
 	/*
+	 * swing components
+	 */
+	private JTextPane inputArea = new JTextPane();
+	private JTextPane outputArea = new JTextPane();
+	
+	/*
 	 * constructor
 	 */
 	private Crypter2()
@@ -68,10 +74,10 @@ public class Crypter2 extends JFrame
 		}
 		
 		// content
-		JButton codeButton = new JButton("Code");
+		JButton codeButton = new JButton("Codieren");
 		codeButton.addActionListener(new CodeAction());
 		
-		JButton decodeButton = new JButton("Decode");
+		JButton decodeButton = new JButton("Decodieren");
 		decodeButton.addActionListener(new DecodeAction());
 		
 		JLabel label = new JLabel("Codierung:");
@@ -87,15 +93,11 @@ public class Crypter2 extends JFrame
 		controlPanel.add(codeLetter);
 		controlPanel.add(codeNumber);
 		
-		JTextPane inputArea = new JTextPane();
 		inputArea.setBorder(BorderFactory.createLineBorder(this.background, 2));
 		inputArea.setEditable(true);
-		inputArea.setText("Moin!");
 		
-		JTextPane outputArea = new JTextPane();
 		outputArea.setBorder(BorderFactory.createLineBorder(this.background, 2));
 		outputArea.setEditable(false);
-		outputArea.setText("Moin!");
 		
 		JPanel textPanel = new JPanel();
 		textPanel.setLayout(new GridLayout(1, 2));
@@ -105,6 +107,16 @@ public class Crypter2 extends JFrame
 		
 		this.add(controlPanel, BorderLayout.NORTH);
 		this.add(textPanel, BorderLayout.CENTER);
+	}
+	
+	public String getInputText()
+	{
+		return this.inputArea.getText();
+	}
+	
+	public void setOutputText(String input)
+	{
+		this.outputArea.setText(input);
 	}
 	
 	public static Crypter2 getInstance()
