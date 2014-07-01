@@ -7,8 +7,10 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,9 +19,6 @@ import javax.swing.UIManager;
 
 import crypter2.actions.CodeAction;
 import crypter2.actions.DecodeAction;
-import crypter2.classes.CButton;
-import crypter2.classes.CComboBox;
-import crypter2.classes.CLabel;
 import crypter2.classes.CTitledBorder;
 
 public class Crypter2 extends JFrame
@@ -30,8 +29,8 @@ public class Crypter2 extends JFrame
 	private static final long serialVersionUID = 1L;
 	private static Crypter2 instance = null;
 	
-	public static Color schemeColor = new Color(16, 78, 139);// 103, 173, 203);
-	public static Color backgroundColor = Color.LIGHT_GRAY;
+	public static Color schemeColor = new Color(16, 78, 139);
+	public static Color backgroundColor = Color.WHITE; // new Color(104, 177, 237);
 	public static Color neutralColor = Color.WHITE;
 	
 	public static Font uiFont = new Font("SansSerif", Font.BOLD, 13);
@@ -49,8 +48,8 @@ public class Crypter2 extends JFrame
 	private JEditorPane inputArea = new JEditorPane();
 	private JEditorPane outputArea = new JEditorPane();
 	
-	private CComboBox codeLetterBox = new CComboBox(letterList);
-	private CComboBox codeNumberBox = new CComboBox(numberList);
+	private JComboBox<String> codeLetterBox = new JComboBox<String>(letterList);
+	private JComboBox<String> codeNumberBox = new JComboBox<String>(numberList);
 	
 	/*
 	 * constructor
@@ -72,15 +71,15 @@ public class Crypter2 extends JFrame
 		// appearance
 		this.setTitle("Crypter2");
 		this.setSize(500, 300);
-		this.setMinimumSize(new Dimension(400, 200));
+		this.setMinimumSize(new Dimension(420, 210));
 		this.setLocationRelativeTo(null);
 		this.setLayout(new BorderLayout());
 		
 		// look and feel
 		try
 		{
-//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		}
 		catch (Exception e)
 		{
@@ -88,38 +87,55 @@ public class Crypter2 extends JFrame
 		}
 		
 		// content
-		JButton codeButton = new CButton();
-		codeButton.setText("Codieren");
+		codeLetterBox.setForeground(Crypter2.schemeColor);
+		codeLetterBox.setFont(Crypter2.uiFont);
+		
+		codeNumberBox.setForeground(Crypter2.schemeColor);
+		codeNumberBox.setFont(Crypter2.uiFont);
+		
+		JButton codeButton = new JButton();
+		codeButton.setBorder(BorderFactory.createEmptyBorder());
+		codeButton.setForeground(Crypter2.schemeColor);
+//		codeButton.setBackground(Crypter2.backgroundColor);
+		codeButton.setFont(Crypter2.uiFont);
+//		codeButton.setText("Codieren");
 		codeButton.setIcon(new ImageIcon(getClass().getResource("/crypter2/resources/lock-32.gif")));
 		codeButton.addActionListener(new CodeAction());
 		
-		JButton decodeButton = new CButton();
-		decodeButton.setText("Decodieren");
+		JButton decodeButton = new JButton();
+		decodeButton.setBorder(BorderFactory.createEmptyBorder());
+		decodeButton.setForeground(Crypter2.schemeColor);
+//		decodeButton.setBackground(Crypter2.backgroundColor);
+		decodeButton.setFont(Crypter2.uiFont);
+//		decodeButton.setText("Decodieren");
 		decodeButton.setIcon(new ImageIcon(getClass().getResource("/crypter2/resources/unlock-32.gif")));
 		decodeButton.addActionListener(new DecodeAction());
 		
-		JLabel label = new CLabel("Code");
+		JLabel label = new JLabel("Code");
+		label.setForeground(Crypter2.schemeColor);
+//		label.setBackground(Crypter2.neutralColor);
+		label.setFont(Crypter2.uiFont);
 		
 		JPanel codePanel = new JPanel();
-		codePanel.setLayout(new FlowLayout());
+		codePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		codePanel.setBackground(Crypter2.backgroundColor);
-		codePanel.add(label);
+//		codePanel.add(label);
 		codePanel.add(this.codeLetterBox);
 		codePanel.add(this.codeNumberBox);
 		codePanel.add(codeButton);
 		codePanel.add(decodeButton);
 		
-		this.inputArea.setBackground(neutralColor);
+//		this.inputArea.setBackground(neutralColor);
 		this.inputArea.setBorder(new CTitledBorder("Eingabe"));
 		this.inputArea.setEditable(true);
 		
-		this.outputArea.setBackground(neutralColor);
+//		this.outputArea.setBackground(neutralColor);
 		this.outputArea.setBorder(new CTitledBorder("Ausgabe"));
 		this.outputArea.setEditable(false);
 		
 		JPanel textPanel = new JPanel();
 		textPanel.setLayout(new GridLayout(1, 2));
-		textPanel.setBackground(Crypter2.backgroundColor);
+//		textPanel.setBackground(Crypter2.backgroundColor);
 		textPanel.add(this.inputArea);
 		textPanel.add(this.outputArea);
 		
