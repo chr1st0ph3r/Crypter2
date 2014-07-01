@@ -1,6 +1,5 @@
 package crypter2.classes;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 
 import crypter2.Crypter2;
@@ -13,7 +12,8 @@ public class CComboBox extends JComboBox<String>
 	{
 		super(items);
 		
-		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setForeground(Crypter2.schemeColor);
+		this.setBackground(Crypter2.neutralColor);
+		this.setFont(Crypter2.uiFont);
 	}
 }

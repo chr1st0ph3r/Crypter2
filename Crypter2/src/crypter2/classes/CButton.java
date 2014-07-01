@@ -15,5 +15,7 @@ public class CButton extends JButton
 		
 		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setForeground(Crypter2.schemeColor);
+		this.setBackground(Crypter2.backgroundColor);
+		this.setFont(Crypter2.uiFont);
 	}
 }

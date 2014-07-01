@@ -1,6 +1,5 @@
 package crypter2.classes;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 import crypter2.Crypter2;
@@ -13,8 +12,9 @@ public class CLabel extends JLabel
 	{
 		super(text);
 		
-		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setForeground(Crypter2.schemeColor);
+		this.setBackground(Crypter2.neutralColor);
+		this.setFont(Crypter2.uiFont);
 	}
 
 }
