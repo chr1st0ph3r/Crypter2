@@ -1,4 +1,4 @@
-package actions;
+package crypter2.actions;
 
 import java.awt.event.ActionEvent;
 

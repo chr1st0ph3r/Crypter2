@@ -15,8 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import actions.CodeAction;
-import actions.DecodeAction;
+import crypter2.actions.CodeAction;
+import crypter2.actions.DecodeAction;
+import crypter2.classes.CButton;
+import crypter2.classes.CComboBox;
+import crypter2.classes.CLabel;
 
 public class Crypter2 extends JFrame
 {
@@ -26,12 +29,14 @@ public class Crypter2 extends JFrame
 	private static final long serialVersionUID = 1L;
 	private static Crypter2 instance = null;
 	
+	public static Color schemeColor = new Color(103, 173, 203);
+	
 	private String[] letterList = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
 			"J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
 			"W", "X", "Y", "Z"};
 	private String[] numberList = {"0", "1", "2", "3", "4", "5", "6", "7", "8",
 			"9"};
-	private Color[] colorList = {new Color(103, 173, 203), Color.PINK};
+	private Color[] colorList = {Color.WHITE, new Color(103, 173, 203), Color.LIGHT_GRAY, Color.PINK};
 	
 	/*
 	 * swing components
@@ -39,8 +44,8 @@ public class Crypter2 extends JFrame
 	private JEditorPane inputArea = new JEditorPane();
 	private JEditorPane outputArea = new JEditorPane();
 	
-	private JComboBox<String> codeLetterBox = new JComboBox<String>(letterList);
-	private JComboBox<String> codeNumberBox = new JComboBox<String>(numberList);
+	private JComboBox<String> codeLetterBox = new CComboBox(letterList);
+	private JComboBox<String> codeNumberBox = new CComboBox(numberList);
 	
 	/*
 	 * constructor
@@ -77,36 +82,42 @@ public class Crypter2 extends JFrame
 		}
 		
 		// content
-		JButton codeButton = new JButton("Codieren");
+		JButton codeButton = new CButton();
+		codeButton.setText("Codieren");
 		codeButton.addActionListener(new CodeAction());
 		
-		JButton decodeButton = new JButton("Decodieren");
+		JButton decodeButton = new CButton();
+		decodeButton.setText("Decodieren");
 		decodeButton.addActionListener(new DecodeAction());
 		
-		JLabel label = new JLabel("Code:");
+		JLabel label = new CLabel("Code:");
 		
-		JPanel controlPanel = new JPanel();
-		controlPanel.setLayout(new FlowLayout());
-		controlPanel.setBackground(this.colorList[0]);
-		controlPanel.add(codeButton);
-		controlPanel.add(decodeButton);
-		controlPanel.add(label);
-		controlPanel.add(codeLetterBox);
-		controlPanel.add(codeNumberBox);
+		JPanel codePanel = new JPanel();
+		codePanel.setLayout(new FlowLayout());
+		codePanel.setBackground(this.colorList[0]);
+		codePanel.add(label);
+		codePanel.add(this.codeLetterBox);
+		codePanel.add(this.codeNumberBox);
+		codePanel.add(codeButton);
+		codePanel.add(decodeButton);
 		
-		inputArea.setBorder(BorderFactory.createLineBorder(this.colorList[0], 2));
-		inputArea.setEditable(true);
+		this.inputArea.setBackground(this.colorList[0]);
+//		this.inputArea.setBorder(BorderFactory.createLineBorder(this.colorList[0], 2));
+		this.inputArea.setBorder(BorderFactory.createTitledBorder("Eingabe"));
+		this.inputArea.setEditable(true);
 		
-		outputArea.setBorder(BorderFactory.createLineBorder(this.colorList[0], 2));
-		outputArea.setEditable(false);
+		this.outputArea.setBackground(this.colorList[0]);
+//		this.outputArea.setBorder(BorderFactory.createLineBorder(this.colorList[0], 2));
+		this.outputArea.setBorder(BorderFactory.createTitledBorder("Ausgabe"));
+		this.outputArea.setEditable(false);
 		
 		JPanel textPanel = new JPanel();
 		textPanel.setLayout(new GridLayout(1, 2));
 		textPanel.setBackground(this.colorList[0]);
-		textPanel.add(inputArea);
-		textPanel.add(outputArea);
+		textPanel.add(this.inputArea);
+		textPanel.add(this.outputArea);
 		
-		this.add(controlPanel, BorderLayout.NORTH);
+		this.add(codePanel, BorderLayout.NORTH);
 		this.add(textPanel, BorderLayout.CENTER);
 	}
 	
@@ -149,7 +160,7 @@ public class Crypter2 extends JFrame
 	 */
 	public static void main(String[] args)
 	{
-		Crypter2 frame = Crypter2.getInstance();
+		JFrame frame = Crypter2.getInstance();
 		frame.setVisible(true);
 	}
 }
